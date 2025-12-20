@@ -1,0 +1,2084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneTribe Design System</title>
+  <link rel="stylesheet" href="css/design-system.css">
+  <style>
+    /* Sticky Navigation Styles */
+    .ds-nav {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 200px;
+      height: 100vh;
+      background: var(--color-white);
+      border-right: 1px solid var(--color-border);
+      padding: var(--space-6) var(--space-4);
+      overflow-y: auto;
+      z-index: var(--z-sticky);
+    }
+    .ds-nav-title {
+      font-size: var(--text-sm);
+      font-weight: var(--font-bold);
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .ds-nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .ds-nav-item {
+      margin-bottom: var(--space-1);
+    }
+    .ds-nav-link {
+      display: block;
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      text-decoration: none;
+      border-radius: var(--radius-md);
+      transition: all var(--transition-fast);
+    }
+    .ds-nav-link:hover {
+      background: var(--color-gray-100);
+      color: var(--color-text);
+      text-decoration: none;
+    }
+    .ds-nav-link.active {
+      background: var(--color-info-10);
+      color: var(--color-info);
+    }
+
+    /* Main Content with offset for nav */
+    .ds-main {
+      margin-left: 200px;
+    }
+
+    /* Preview-specific styles */
+    .preview-section {
+      padding: var(--space-8) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .preview-section:last-child {
+      border-bottom: none;
+    }
+    .section-title {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-bold);
+      color: var(--color-text);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-3);
+      border-bottom: 2px solid var(--color-primary);
+      display: inline-block;
+    }
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: var(--space-4);
+    }
+    .color-swatch {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+    }
+    .color-swatch-preview {
+      height: 80px;
+    }
+    .color-swatch-info {
+      padding: var(--space-3);
+      background: var(--color-white);
+    }
+    .color-swatch-name {
+      font-weight: var(--font-semibold);
+      font-size: var(--text-sm);
+      color: var(--color-text);
+    }
+    .color-swatch-value {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      margin-top: var(--space-1);
+    }
+    .typography-sample {
+      margin-bottom: var(--space-4);
+      padding: var(--space-4);
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+    }
+    .typography-label {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      font-family: var(--font-mono);
+      margin-bottom: var(--space-2);
+    }
+    .component-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      align-items: center;
+      margin-bottom: var(--space-6);
+    }
+    .component-group {
+      background: var(--color-white);
+      padding: var(--space-6);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
+      margin-bottom: var(--space-6);
+    }
+    .component-group-title {
+      font-size: var(--text-sm);
+      font-weight: var(--font-semibold);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wider);
+      margin-bottom: var(--space-4);
+    }
+    .spacing-demo {
+      display: flex;
+      align-items: flex-end;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+    .spacing-box {
+      background: var(--color-primary);
+      opacity: 0.8;
+      border-radius: var(--radius-sm);
+    }
+    .spacing-label {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      text-align: center;
+      margin-top: var(--space-2);
+      font-family: var(--font-mono);
+    }
+    .radius-demo {
+      display: flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+    .radius-box {
+      width: 80px;
+      height: 80px;
+      background: var(--color-info);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-white);
+      font-size: var(--text-xs);
+      font-family: var(--font-mono);
+    }
+    .shadow-demo {
+      display: flex;
+      gap: var(--space-6);
+      flex-wrap: wrap;
+    }
+    .shadow-box {
+      width: 120px;
+      height: 80px;
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      font-family: var(--font-mono);
+    }
+    .gradient-demo {
+      display: flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+    .gradient-box {
+      width: 200px;
+      height: 100px;
+      border-radius: var(--radius-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+      color: var(--color-text);
+    }
+    .form-demo {
+      max-width: 400px;
+    }
+    .form-group {
+      margin-bottom: var(--space-4);
+    }
+    .form-label {
+      display: block;
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+      color: var(--color-text);
+      margin-bottom: var(--space-2);
+    }
+    .interactive-demo {
+      padding: var(--space-6);
+      background: var(--color-white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
+    }
+    .nav-preview {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-4) var(--space-6);
+      background: var(--color-white);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--color-border);
+      margin-bottom: var(--space-6);
+    }
+    .nav-logo {
+      font-size: var(--text-xl);
+      font-weight: var(--font-bold);
+      color: var(--color-primary);
+    }
+    .nav-links {
+      display: flex;
+      gap: var(--space-6);
+    }
+    .nav-link {
+      color: var(--color-text);
+      text-decoration: none;
+      font-weight: var(--font-medium);
+      transition: color var(--transition-fast);
+    }
+    .nav-link:hover {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+    .logo-grid {
+      display: flex;
+      gap: var(--space-8);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .logo-item {
+      text-align: center;
+    }
+    .logo-item img {
+      max-height: 40px;
+      margin-bottom: var(--space-3);
+    }
+    .logo-item-dark {
+      background: var(--color-text);
+      padding: var(--space-6);
+      border-radius: var(--radius-xl);
+    }
+
+    /* Responsive - hide nav on small screens */
+    @media (max-width: 768px) {
+      .ds-nav {
+        display: none;
+      }
+      .ds-main {
+        margin-left: 0;
+      }
+    }
+
+    /* ==========================================================================
+       Feature Spotlight Component
+       ========================================================================== */
+
+    .feature-spotlight {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: var(--space-16) var(--space-6);
+      background: var(--color-background);
+    }
+
+    /* Header */
+    .feature-spotlight__header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto var(--space-12);
+    }
+
+    .feature-spotlight__header .badge {
+      margin-bottom: var(--space-6);
+    }
+
+    .feature-spotlight__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-4xl);
+      font-weight: var(--font-normal);
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-tight);
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+    }
+
+    .feature-spotlight__subtitle {
+      font-size: var(--text-lg);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text);
+    }
+
+    /* Grid Layout */
+    .feature-spotlight__grid {
+      display: grid;
+      grid-template-columns: 45% 55%;
+      gap: var(--space-8);
+      align-items: center;
+    }
+
+    /* Left Column - Features */
+    .feature-spotlight__features {
+      padding-right: var(--space-6);
+    }
+
+    .feature-spotlight__features-title {
+      font-family: var(--font-heading);
+      font-size: var(--text-2xl);
+      font-weight: var(--font-normal);
+      line-height: var(--leading-snug);
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+    }
+
+    .feature-spotlight__features-desc {
+      font-size: var(--text-base);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text);
+      margin-bottom: var(--space-6);
+    }
+
+    /* Feature List */
+    .feature-spotlight__list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 var(--space-6);
+    }
+
+    .feature-spotlight__list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      padding: var(--space-2) 0;
+      font-size: var(--text-base);
+      color: var(--color-text);
+      line-height: var(--leading-normal);
+    }
+
+    .feature-spotlight__checkmark {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .feature-spotlight__footnote {
+      font-size: var(--text-sm);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text);
+    }
+
+    /* Right Column - Image Box */
+    .feature-spotlight__image-box {
+      background: linear-gradient(135deg, rgba(7, 190, 176, 0.25) 0%, rgba(119, 75, 229, 0.25) 100%);
+      border-radius: var(--radius-3xl);
+      padding: var(--space-8) var(--space-16) 0;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .feature-spotlight__image {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      display: block;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .feature-spotlight__grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-10);
+      }
+
+      .feature-spotlight__features {
+        padding-right: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .feature-spotlight {
+        padding: var(--space-10) var(--space-4);
+      }
+
+      .feature-spotlight__title {
+        font-size: var(--text-3xl);
+      }
+
+      .feature-spotlight__features-title {
+        font-size: var(--text-xl);
+      }
+
+      .feature-spotlight__image-box {
+        padding: var(--space-6) var(--space-12) 0;
+      }
+    }
+
+    /* ==========================================================================
+       Pricing Component
+       ========================================================================== */
+
+    .pricing {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: var(--space-16) var(--space-6);
+      background: var(--color-background);
+    }
+
+    /* Header */
+    .pricing__header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto var(--space-12);
+    }
+
+    .pricing__header .badge {
+      margin-bottom: var(--space-6);
+    }
+
+    .pricing__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-4xl);
+      font-weight: var(--font-normal);
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-tight);
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+    }
+
+    .pricing__subtitle {
+      font-size: var(--text-base);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text);
+    }
+
+    /* Pricing Container (White box) */
+    .pricing__container {
+      background: var(--color-white);
+      border-radius: var(--radius-3xl);
+      padding: var(--space-4);
+      border: 1px solid var(--color-border);
+      margin-bottom: var(--space-12);
+    }
+
+    /* Pricing Grid */
+    .pricing__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    /* Pricing Tier */
+    .pricing__tier {
+      padding: var(--space-6);
+      border-right: 1px solid var(--color-border-light);
+    }
+
+    .pricing__tier:nth-child(1) {
+      border-right: none;
+    }
+
+    .pricing__tier:nth-child(3) {
+      border-right: none;
+    }
+
+    .pricing__tier:last-child {
+      border-right: none;
+    }
+
+    /* Highlighted Tier */
+    .pricing__tier--highlighted {
+      background: var(--color-gray-50);
+      border-radius: var(--radius-2xl);
+      border: 1px solid var(--color-border);
+    }
+
+    .pricing__tier--highlighted + .pricing__tier {
+      border-left: none;
+    }
+
+    /* Tier Header */
+    .pricing__tier-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      margin-bottom: var(--space-3);
+      min-height: 30px;
+    }
+
+    .pricing__tier-name {
+      font-family: var(--font-heading);
+      font-size: var(--text-base);
+      font-weight: var(--font-normal);
+      line-height: var(--leading-snug);
+      color: var(--color-text);
+      margin: 0;
+    }
+
+    .pricing__tier-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--space-1) var(--space-2);
+      font-size: var(--text-xs);
+      font-weight: var(--font-medium);
+      background: var(--color-primary);
+      color: var(--color-white);
+      border-radius: var(--radius-full);
+    }
+
+    /* Price */
+    .pricing__price {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-1);
+      margin-bottom: var(--space-3);
+    }
+
+    .pricing__price-prefix {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    .pricing__price-amount {
+      font-family: var(--font-heading);
+      font-size: var(--text-3xl);
+      font-weight: var(--font-normal);
+      color: var(--color-text);
+    }
+
+    .pricing__price-period {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    /* Tier Description */
+    .pricing__tier-desc {
+      font-size: var(--text-sm);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+      min-height: 60px;
+    }
+
+    /* Divider */
+    .pricing__divider {
+      height: 1px;
+      background: var(--color-text);
+      margin-bottom: var(--space-4);
+    }
+
+    /* Features Label */
+    .pricing__features-label {
+      display: block;
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+      color: var(--color-text);
+      margin-bottom: var(--space-3);
+    }
+
+    /* Features List */
+    .pricing__features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .pricing__feature {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-2);
+      padding: var(--space-1) 0;
+      font-size: var(--text-sm);
+      color: var(--color-text);
+      line-height: var(--leading-normal);
+    }
+
+    .pricing__checkmark {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    .pricing__arrow {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+      color: var(--color-primary);
+    }
+
+    /* Child features (indented) */
+    .pricing__feature--child {
+      color: var(--color-text);
+    }
+
+    .pricing__feature--child .pricing__arrow svg {
+      stroke: var(--color-primary);
+    }
+
+    /* Footer CTA */
+    .pricing__footer {
+      text-align: center;
+    }
+
+    .pricing__footer-question {
+      font-size: var(--text-base);
+      font-weight: var(--font-normal);
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+    }
+
+    .pricing__footer .btn {
+      margin-bottom: var(--space-4);
+    }
+
+    .pricing__footer-subtext {
+      font-size: var(--text-base);
+      font-weight: var(--font-normal);
+      color: var(--color-text);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Responsive - Tablet */
+    @media (max-width: 1024px) {
+      .pricing__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .pricing__tier {
+        border-right: none;
+        border-bottom: 1px solid var(--color-border-light);
+      }
+
+      .pricing__tier:nth-child(odd) {
+        border-right: 1px solid var(--color-border-light);
+      }
+
+      .pricing__tier:nth-last-child(-n+2) {
+        border-bottom: none;
+      }
+
+      .pricing__tier--highlighted {
+        margin: calc(var(--space-2) * -1);
+        padding: calc(var(--space-6) + var(--space-2));
+      }
+    }
+
+    /* Responsive - Mobile */
+    @media (max-width: 768px) {
+      .pricing {
+        padding: var(--space-10) var(--space-4);
+      }
+
+      .pricing__title {
+        font-size: var(--text-3xl);
+      }
+
+      .pricing__container {
+        padding: var(--space-4);
+        border-radius: var(--radius-2xl);
+      }
+
+      .pricing__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing__tier {
+        border-right: none;
+        border-bottom: 1px solid var(--color-border-light);
+        padding: var(--space-5);
+      }
+
+      .pricing__tier:last-child {
+        border-bottom: none;
+      }
+
+      .pricing__tier--highlighted {
+        margin: calc(var(--space-1) * -1);
+        padding: calc(var(--space-5) + var(--space-1));
+        border-radius: var(--radius-xl);
+      }
+
+      .pricing__tier-desc {
+        min-height: auto;
+      }
+    }
+
+    /* ==========================================================================
+       FAQ Component
+       ========================================================================== */
+
+    .faq {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: var(--space-16) var(--space-6);
+      background: var(--color-background);
+    }
+
+    /* Header */
+    .faq__header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto var(--space-12);
+    }
+
+    .faq__header .badge {
+      margin-bottom: var(--space-6);
+    }
+
+    .faq__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-4xl);
+      font-weight: var(--font-normal);
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-tight);
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+    }
+
+    .faq__subtitle {
+      font-size: var(--text-base);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text);
+    }
+
+    /* Accordion Container */
+    .faq__accordion {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    /* Accordion Item */
+    .faq__item {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      transition: border-color var(--transition-fast);
+    }
+
+    .faq__item:hover {
+      border-color: var(--color-gray-300);
+    }
+
+    /* Accordion Trigger */
+    .faq__trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: var(--space-5) var(--space-6);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+    }
+
+    .faq__question {
+      font-size: var(--text-base);
+      font-weight: var(--font-normal);
+      color: var(--color-text);
+      line-height: var(--leading-normal);
+    }
+
+    .faq__icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      color: var(--color-text);
+      transition: transform 300ms ease-in-out;
+    }
+
+    .faq__item.is-open .faq__icon {
+      transform: rotate(180deg);
+    }
+
+    /* Accordion Content */
+    .faq__content {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 300ms ease-in-out;
+    }
+
+    .faq__item.is-open .faq__content {
+      grid-template-rows: 1fr;
+    }
+
+    .faq__content-inner {
+      overflow: hidden;
+    }
+
+    .faq__answer {
+      padding: 0 var(--space-6) var(--space-5);
+      font-size: var(--text-base);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text);
+    }
+
+    /* Footer Contact */
+    .faq__footer {
+      text-align: center;
+      margin-top: var(--space-10);
+    }
+
+    .faq__contact {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-base);
+      color: var(--color-text);
+    }
+
+    .faq__contact-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      color: var(--color-text-muted);
+    }
+
+    .faq__contact a {
+      color: var(--color-text);
+      text-decoration: none;
+      font-weight: var(--font-medium);
+    }
+
+    .faq__contact a:hover {
+      color: var(--color-primary);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .faq {
+        padding: var(--space-10) var(--space-4);
+      }
+
+      .faq__title {
+        font-size: var(--text-3xl);
+      }
+
+      .faq__trigger {
+        padding: var(--space-4) var(--space-5);
+      }
+
+      .faq__answer {
+        padding: 0 var(--space-5) var(--space-4);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sticky Navigation -->
+  <nav class="ds-nav">
+    <div class="ds-nav-title">Components</div>
+    <ul class="ds-nav-list">
+      <li class="ds-nav-item"><a href="#logo" class="ds-nav-link">Logo</a></li>
+      <li class="ds-nav-item"><a href="#colors" class="ds-nav-link">Colors</a></li>
+      <li class="ds-nav-item"><a href="#gradients" class="ds-nav-link">Gradients</a></li>
+      <li class="ds-nav-item"><a href="#typography" class="ds-nav-link">Typography</a></li>
+      <li class="ds-nav-item"><a href="#buttons" class="ds-nav-link">Buttons</a></li>
+      <li class="ds-nav-item"><a href="#cards" class="ds-nav-link">Cards</a></li>
+      <li class="ds-nav-item"><a href="#badges" class="ds-nav-link">Badges</a></li>
+      <li class="ds-nav-item"><a href="#forms" class="ds-nav-link">Forms</a></li>
+      <li class="ds-nav-item"><a href="#shadows" class="ds-nav-link">Shadows</a></li>
+      <li class="ds-nav-item"><a href="#radius" class="ds-nav-link">Border Radius</a></li>
+      <li class="ds-nav-item"><a href="#spacing" class="ds-nav-link">Spacing</a></li>
+      <li class="ds-nav-item"><a href="#demo" class="ds-nav-link">Interactive Demo</a></li>
+      <li class="ds-nav-item"><a href="#feature-spotlight" class="ds-nav-link">Feature Spotlight</a></li>
+      <li class="ds-nav-item"><a href="#pricing" class="ds-nav-link">Pricing</a></li>
+      <li class="ds-nav-item"><a href="#faq" class="ds-nav-link">FAQ</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="ds-main">
+    <div class="container" style="padding-top: var(--space-8); padding-bottom: var(--space-16);">
+
+      <!-- Header -->
+      <header style="text-align: center; margin-bottom: var(--space-12);">
+        <h1 class="heading-1" style="margin-bottom: var(--space-4);">OneTribe Design System</h1>
+        <p class="text-body-lg" style="color: var(--color-text-muted); max-width: 600px; margin: 0 auto;">
+          A comprehensive design system for building consistent, beautiful interfaces.
+        </p>
+      </header>
+
+      <!-- Logo Section -->
+      <section id="logo" class="preview-section">
+        <h2 class="section-title">Logo</h2>
+
+        <div class="component-group">
+          <div class="component-group-title">Primary & Secondary Logos</div>
+          <div class="logo-grid">
+            <div class="logo-item">
+              <img src="images/Logo-primary-dark.svg" alt="OneTribe Primary Logo">
+              <div class="typography-label">Primary Logo (Dark)</div>
+            </div>
+            <div class="logo-item">
+              <img src="images/Logo-secondary-dark.svg" alt="OneTribe Secondary Logo">
+              <div class="typography-label">Secondary Logo (Dark)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Colors Section -->
+      <section id="colors" class="preview-section">
+        <h2 class="section-title">Colors</h2>
+
+        <h3 class="heading-5" style="margin-bottom: var(--space-4);">Brand Colors</h3>
+        <div class="color-grid" style="margin-bottom: var(--space-8);">
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background-color: var(--color-primary);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Primary</div>
+              <div class="color-swatch-value">#07BEB0</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background-color: var(--color-primary-10);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Primary 10%</div>
+              <div class="color-swatch-value">rgba(7,190,176,0.1)</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background-color: var(--color-primary-light);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Primary Light</div>
+              <div class="color-swatch-value">#3DD4C6</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background-color: var(--color-primary-dark);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Primary Dark</div>
+              <div class="color-swatch-value">#059E92</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background-color: var(--color-info);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Info (Purple)</div>
+              <div class="color-swatch-value">#774BE5</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background-color: var(--color-info-10);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Info 10%</div>
+              <div class="color-swatch-value">rgba(119,75,229,0.1)</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background-color: var(--color-info-light);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Info Light</div>
+              <div class="color-swatch-value">#9B7AED</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background-color: var(--color-info-dark);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Info Dark</div>
+              <div class="color-swatch-value">#5C35C4</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="heading-5" style="margin-bottom: var(--space-4);">Text & Background</h3>
+        <div class="color-grid" style="margin-bottom: var(--space-8);">
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background-color: var(--color-text);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Text</div>
+              <div class="color-swatch-value">#000000</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background-color: var(--color-text-secondary);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Text Secondary</div>
+              <div class="color-swatch-value">#4A4A4A</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background-color: var(--color-text-muted);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Text Muted</div>
+              <div class="color-swatch-value">#6B6B6B</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background-color: var(--color-background); border: 1px solid var(--color-border);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Background</div>
+              <div class="color-swatch-value">#F5F5F5</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background-color: var(--color-border);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Border</div>
+              <div class="color-swatch-value">#D8DFE5</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background-color: var(--color-white); border: 1px solid var(--color-border);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">White</div>
+              <div class="color-swatch-value">#FFFFFF</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="heading-5" style="margin-bottom: var(--space-4);">Semantic Colors</h3>
+        <div class="color-grid">
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background-color: var(--color-success);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Success</div>
+              <div class="color-swatch-value">#10B981</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background-color: var(--color-warning);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Warning</div>
+              <div class="color-swatch-value">#F59E0B</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-preview" style="background-color: var(--color-error);"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Error</div>
+              <div class="color-swatch-value">#EF4444</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gradients Section -->
+      <section id="gradients" class="preview-section">
+        <h2 class="section-title">Gradients</h2>
+        <div class="gradient-demo">
+          <div class="gradient-box" style="background: var(--gradient-primary-light);">Primary Light (10%)</div>
+          <div class="gradient-box" style="background: var(--gradient-accent-light);">Accent Light (10%)</div>
+          <div class="gradient-box" style="background: var(--gradient-hero);">Hero Gradient</div>
+        </div>
+      </section>
+
+      <!-- Typography Section -->
+      <section id="typography" class="preview-section">
+        <h2 class="section-title">Typography</h2>
+
+        <div class="component-group">
+          <div class="component-group-title">Primary Headings (Regular Weight)</div>
+
+          <div class="typography-sample">
+            <div class="typography-label">.heading-1 (48px / Regular)</div>
+            <h1 class="heading-1">The quick brown fox jumps</h1>
+          </div>
+
+          <div class="typography-sample">
+            <div class="typography-label">.heading-2 (36px / Regular)</div>
+            <h2 class="heading-2">The quick brown fox jumps over</h2>
+          </div>
+
+          <div class="typography-sample">
+            <div class="typography-label">.heading-3 (30px / Regular)</div>
+            <h3 class="heading-3">The quick brown fox jumps over the lazy dog</h3>
+          </div>
+
+          <div class="typography-sample">
+            <div class="typography-label">.heading-4 (24px / Regular)</div>
+            <h4 class="heading-4">The quick brown fox jumps over the lazy dog</h4>
+          </div>
+
+          <div class="typography-sample">
+            <div class="typography-label">.heading-5 (20px / Regular)</div>
+            <h5 class="heading-5">The quick brown fox jumps over the lazy dog</h5>
+          </div>
+
+          <div class="typography-sample">
+            <div class="typography-label">.heading-6 (18px / Regular)</div>
+            <h6 class="heading-6">The quick brown fox jumps over the lazy dog</h6>
+          </div>
+        </div>
+
+        <div class="component-group">
+          <div class="component-group-title">Secondary Headings (Bold Weight)</div>
+
+          <div class="typography-sample">
+            <div class="typography-label">.heading-1-bold (48px / Bold)</div>
+            <h1 class="heading-1-bold">The quick brown fox jumps</h1>
+          </div>
+
+          <div class="typography-sample">
+            <div class="typography-label">.heading-2-bold (36px / Bold)</div>
+            <h2 class="heading-2-bold">The quick brown fox jumps over</h2>
+          </div>
+
+          <div class="typography-sample">
+            <div class="typography-label">.heading-3-bold (30px / Bold)</div>
+            <h3 class="heading-3-bold">The quick brown fox jumps over the lazy dog</h3>
+          </div>
+
+          <div class="typography-sample">
+            <div class="typography-label">.heading-4-bold (24px / Bold)</div>
+            <h4 class="heading-4-bold">The quick brown fox jumps over the lazy dog</h4>
+          </div>
+        </div>
+
+        <div class="component-group">
+          <div class="component-group-title">Card Title</div>
+
+          <div class="typography-sample">
+            <div class="typography-label">.card-title (18px / Medium)</div>
+            <h3 class="card-title">Card Title Example</h3>
+          </div>
+        </div>
+
+        <div class="component-group">
+          <div class="component-group-title">Body Text</div>
+
+          <div class="typography-sample">
+            <div class="typography-label">.text-body-lg (18px)</div>
+            <p class="text-body-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+
+          <div class="typography-sample">
+            <div class="typography-label">.text-body (16px)</div>
+            <p class="text-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+          </div>
+
+          <div class="typography-sample">
+            <div class="typography-label">.text-body-sm (14px)</div>
+            <p class="text-body-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+
+          <div class="typography-sample">
+            <div class="typography-label">.text-label (14px / Uppercase)</div>
+            <span class="text-label">Label Text</span>
+          </div>
+
+          <div class="typography-sample">
+            <div class="typography-label">.text-caption (12px)</div>
+            <span class="text-caption">Caption text for small details and metadata</span>
+          </div>
+        </div>
+
+        <div class="component-group">
+          <div class="component-group-title">Links</div>
+
+          <div class="typography-sample">
+            <div class="typography-label">Default link (Info color)</div>
+            <p class="text-body">This is a paragraph with a <a href="#">default link</a> that uses the info color and underlines on hover.</p>
+          </div>
+
+          <div class="typography-sample">
+            <div class="typography-label">.link-primary (Primary color)</div>
+            <p class="text-body">This is a paragraph with a <a href="#" class="link-primary">primary link</a> that uses the primary teal color.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Buttons Section -->
+      <section id="buttons" class="preview-section">
+        <h2 class="section-title">Buttons</h2>
+
+        <div class="component-group">
+          <div class="component-group-title">Button Variants</div>
+          <div class="component-row">
+            <button class="btn btn-primary">Primary Button</button>
+            <button class="btn btn-info">Info Button</button>
+            <button class="btn btn-dark">Dark Button</button>
+            <button class="btn btn-secondary">Secondary Button</button>
+          </div>
+        </div>
+
+        <div class="component-group">
+          <div class="component-group-title">Ghost Buttons</div>
+          <div class="component-row">
+            <button class="btn btn-ghost">Ghost (Default)</button>
+            <button class="btn btn-ghost-primary">Ghost Primary</button>
+            <button class="btn btn-ghost-info">Ghost Info</button>
+          </div>
+        </div>
+
+        <div class="component-group">
+          <div class="component-group-title">Buttons with Shadow (Optional)</div>
+          <div class="component-row">
+            <button class="btn btn-primary btn-shadow">Primary + Shadow</button>
+            <button class="btn btn-info btn-shadow">Info + Shadow</button>
+            <button class="btn btn-dark btn-shadow">Dark + Shadow</button>
+            <button class="btn btn-secondary btn-shadow">Secondary + Shadow</button>
+          </div>
+        </div>
+
+        <div class="component-group">
+          <div class="component-group-title">Button Sizes</div>
+          <div class="component-row">
+            <button class="btn btn-primary btn-sm">Small Button</button>
+            <button class="btn btn-primary">Default Button</button>
+            <button class="btn btn-primary btn-lg">Large Button</button>
+          </div>
+        </div>
+
+        <div class="component-group">
+          <div class="component-group-title">Button with Icons</div>
+          <div class="component-row">
+            <button class="btn btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+              Get Started
+            </button>
+            <button class="btn btn-secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21l-4.35-4.35"/>
+              </svg>
+              Search
+            </button>
+            <button class="btn btn-dark btn-lg">
+              Contact Us
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cards Section -->
+      <section id="cards" class="preview-section">
+        <h2 class="section-title">Cards</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-6);">
+          <div class="card">
+            <h3 class="card-title">Default Card</h3>
+            <p class="text-body">This is a default card with border. On hover, the border changes to primary color.</p>
+            <button class="btn btn-primary btn-sm" style="margin-top: var(--space-4);">Learn More</button>
+          </div>
+
+          <div class="card card-shadow">
+            <h3 class="card-title">Card with Shadow</h3>
+            <p class="text-body">This card uses the optional shadow modifier. It has a subtle hover effect that lifts it slightly.</p>
+            <button class="btn btn-secondary btn-sm" style="margin-top: var(--space-4);">Learn More</button>
+          </div>
+
+          <div class="card" style="background: var(--gradient-primary-light);">
+            <h3 class="card-title">Gradient Card (Light)</h3>
+            <p class="text-body">This card uses the light gradient background (10% opacity) with black text.</p>
+            <button class="btn btn-dark btn-sm" style="margin-top: var(--space-4);">Learn More</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Badges Section -->
+      <section id="badges" class="preview-section">
+        <h2 class="section-title">Badges</h2>
+
+        <div class="component-group">
+          <div class="component-group-title">Badge Variants</div>
+          <div class="component-row">
+            <span class="badge">Default</span>
+            <span class="badge badge-primary">Primary</span>
+            <span class="badge badge-info">Info</span>
+            <span class="badge badge-success">Success</span>
+            <span class="badge badge-gradient">Gradient (Light)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Form Elements Section -->
+      <section id="forms" class="preview-section">
+        <h2 class="section-title">Form Elements</h2>
+
+        <div class="component-group">
+          <div class="form-demo">
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="input" placeholder="you@example.com">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <input type="password" class="input" placeholder="Enter your password">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Message</label>
+              <textarea class="input" rows="4" placeholder="Type your message here..."></textarea>
+            </div>
+
+            <button class="btn btn-dark" style="width: 100%;">Submit Form</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shadows Section -->
+      <section id="shadows" class="preview-section">
+        <h2 class="section-title">Shadows</h2>
+
+        <div class="shadow-demo">
+          <div>
+            <div class="shadow-box" style="box-shadow: var(--shadow-xs);">xs</div>
+            <div class="spacing-label">shadow-xs</div>
+          </div>
+          <div>
+            <div class="shadow-box" style="box-shadow: var(--shadow-sm);">sm</div>
+            <div class="spacing-label">shadow-sm</div>
+          </div>
+          <div>
+            <div class="shadow-box" style="box-shadow: var(--shadow-md);">md</div>
+            <div class="spacing-label">shadow-md</div>
+          </div>
+          <div>
+            <div class="shadow-box" style="box-shadow: var(--shadow-lg);">lg</div>
+            <div class="spacing-label">shadow-lg</div>
+          </div>
+          <div>
+            <div class="shadow-box" style="box-shadow: var(--shadow-xl);">xl</div>
+            <div class="spacing-label">shadow-xl</div>
+          </div>
+          <div>
+            <div class="shadow-box" style="box-shadow: var(--shadow-2xl);">2xl</div>
+            <div class="spacing-label">shadow-2xl</div>
+          </div>
+          <div>
+            <div class="shadow-box" style="box-shadow: var(--shadow-card);">card</div>
+            <div class="spacing-label">shadow-card</div>
+          </div>
+          <div>
+            <div class="shadow-box" style="box-shadow: var(--shadow-primary);">primary</div>
+            <div class="spacing-label">shadow-primary</div>
+          </div>
+          <div>
+            <div class="shadow-box" style="box-shadow: var(--shadow-info);">info</div>
+            <div class="spacing-label">shadow-info</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Border Radius Section -->
+      <section id="radius" class="preview-section">
+        <h2 class="section-title">Border Radius</h2>
+
+        <div class="radius-demo">
+          <div>
+            <div class="radius-box" style="border-radius: var(--radius-none);">none</div>
+            <div class="spacing-label">0</div>
+          </div>
+          <div>
+            <div class="radius-box" style="border-radius: var(--radius-sm);">sm</div>
+            <div class="spacing-label">4px</div>
+          </div>
+          <div>
+            <div class="radius-box" style="border-radius: var(--radius-md);">md</div>
+            <div class="spacing-label">8px</div>
+          </div>
+          <div>
+            <div class="radius-box" style="border-radius: var(--radius-lg);">lg</div>
+            <div class="spacing-label">12px</div>
+          </div>
+          <div>
+            <div class="radius-box" style="border-radius: var(--radius-xl);">xl</div>
+            <div class="spacing-label">16px</div>
+          </div>
+          <div>
+            <div class="radius-box" style="border-radius: var(--radius-2xl);">2xl</div>
+            <div class="spacing-label">24px</div>
+          </div>
+          <div>
+            <div class="radius-box" style="border-radius: var(--radius-full);">full</div>
+            <div class="spacing-label">pill</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Spacing Section -->
+      <section id="spacing" class="preview-section">
+        <h2 class="section-title">Spacing Scale</h2>
+
+        <div class="spacing-demo">
+          <div>
+            <div class="spacing-box" style="width: 16px; height: 16px;"></div>
+            <div class="spacing-label">4px</div>
+          </div>
+          <div>
+            <div class="spacing-box" style="width: 24px; height: 24px;"></div>
+            <div class="spacing-label">8px</div>
+          </div>
+          <div>
+            <div class="spacing-box" style="width: 32px; height: 32px;"></div>
+            <div class="spacing-label">12px</div>
+          </div>
+          <div>
+            <div class="spacing-box" style="width: 40px; height: 40px;"></div>
+            <div class="spacing-label">16px</div>
+          </div>
+          <div>
+            <div class="spacing-box" style="width: 52px; height: 52px;"></div>
+            <div class="spacing-label">24px</div>
+          </div>
+          <div>
+            <div class="spacing-box" style="width: 68px; height: 68px;"></div>
+            <div class="spacing-label">32px</div>
+          </div>
+          <div>
+            <div class="spacing-box" style="width: 88px; height: 88px;"></div>
+            <div class="spacing-label">48px</div>
+          </div>
+          <div>
+            <div class="spacing-box" style="width: 116px; height: 116px;"></div>
+            <div class="spacing-label">64px</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Demo Section -->
+      <section id="demo" class="preview-section">
+        <h2 class="section-title">Interactive Demo</h2>
+
+        <div class="interactive-demo">
+          <div class="component-group-title">Sample Navigation</div>
+          <nav class="nav-preview">
+            <img src="images/Logo-primary-dark.svg" alt="OneTribe" style="max-width: 160px;">
+            <div class="nav-links">
+              <a href="#" class="nav-link">Home</a>
+              <a href="#" class="nav-link">Features</a>
+              <a href="#" class="nav-link">Pricing</a>
+              <a href="#" class="nav-link">About</a>
+            </div>
+            <button class="btn btn-dark">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+              Get Started
+            </button>
+          </nav>
+
+          <div class="component-group-title" style="margin-top: var(--space-8);">Sample Hero Section</div>
+          <div style="text-align: center; padding: var(--space-12); background: var(--gradient-hero); border-radius: var(--radius-2xl); border: 1px solid var(--color-border);">
+            <span class="badge badge-gradient" style="margin-bottom: var(--space-4);">New Feature</span>
+            <h2 class="heading-2" style="margin-bottom: var(--space-4);">Build something amazing</h2>
+            <p class="text-body-lg" style="max-width: 500px; margin: 0 auto var(--space-6);">
+              Create beautiful, responsive interfaces with our comprehensive design system. <a href="#">Learn more</a> about our features.
+            </p>
+            <div style="display: flex; gap: var(--space-4); justify-content: center;">
+              <button class="btn btn-info btn-lg">Get Started Free</button>
+              <button class="btn btn-secondary btn-lg">Learn More</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature Spotlight Section -->
+      <section id="feature-spotlight" class="preview-section">
+        <h2 class="section-title">Feature Spotlight</h2>
+
+        <div class="component-group" style="background: var(--color-background); padding: 0; border: none;">
+          <!-- Feature Spotlight Component -->
+          <div class="feature-spotlight">
+            <!-- Header - Centered -->
+            <div class="feature-spotlight__header">
+              <span class="badge">Prečo Onetribe?</span>
+              <h2 class="feature-spotlight__title">
+                Máte prístup k dátam, ale chýba Vám rýchly a jasný prehľad?
+              </h2>
+              <p class="feature-spotlight__subtitle">
+                Väčšina SME má dáta, ale reporty nestačia – potrebujete insighty, nie ďalší dashboard.
+              </p>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="feature-spotlight__grid">
+              <!-- Left Column - Features -->
+              <div class="feature-spotlight__features">
+                <h3 class="feature-spotlight__features-title">
+                  Preto sme vyvinuli platformu, ktorej súčasťou je aj Onetribe AI.
+                </h3>
+                <p class="feature-spotlight__features-desc">
+                  Píšete bežným jazykom na webe aj v mobile, analytiku máte za pár minút.
+                </p>
+
+                <ul class="feature-spotlight__list">
+                  <li class="feature-spotlight__list-item">
+                    <span class="feature-spotlight__checkmark">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                        <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                    <span>Pracuje s vašimi vlastnými dátami</span>
+                  </li>
+                  <li class="feature-spotlight__list-item">
+                    <span class="feature-spotlight__checkmark">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                        <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                    <span>Odpovedá v reálnom čase</span>
+                  </li>
+                  <li class="feature-spotlight__list-item">
+                    <span class="feature-spotlight__checkmark">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                        <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                    <span>Porovnáva váš výkon s trhom</span>
+                  </li>
+                  <li class="feature-spotlight__list-item">
+                    <span class="feature-spotlight__checkmark">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                        <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                    <span>Spraví health-check na jeden prompt</span>
+                  </li>
+                  <li class="feature-spotlight__list-item">
+                    <span class="feature-spotlight__checkmark">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                        <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                    <span>Dá vám prehľad, keď ho naozaj potrebujete</span>
+                  </li>
+                </ul>
+
+                <p class="feature-spotlight__footnote">
+                  Nemusíte hádať, čo sa pýtať. Dostanete overené otázky pre finančnú analýzu — stačí kliknúť a spustiť.
+                </p>
+              </div>
+
+              <!-- Right Column - Image Box -->
+              <div class="feature-spotlight__image-box">
+                <img src="images/claude-02.png" alt="AI Analytics" class="feature-spotlight__image">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing Section -->
+      <section id="pricing" class="preview-section">
+        <h2 class="section-title">Pricing</h2>
+
+        <div class="component-group" style="background: var(--color-background); padding: 0; border: none;">
+          <!-- Pricing Component -->
+          <div class="pricing">
+            <!-- Header - Centered -->
+            <div class="pricing__header">
+              <span class="badge">Transparentné ceny, žiadne prekvapenia</span>
+              <h2 class="pricing__title">Flexibilné ceny pre každého</h2>
+              <p class="pricing__subtitle">
+                Naše odporúčanie: Professional balíček poskytuje optimálny pomer hodnoty a funkcionality - denné detaily špecifické pre vašu oblasť podnikania umožňujú proaktívne riadenie a predchádzanie operačným výzvam.
+              </p>
+            </div>
+
+            <!-- Pricing Container (White box with all tiers) -->
+            <div class="pricing__container">
+              <div class="pricing__grid">
+
+                <!-- Essential Tier -->
+                <div class="pricing__tier">
+                  <div class="pricing__tier-header">
+                    <h3 class="pricing__tier-name">Essential</h3>
+                  </div>
+                  <div class="pricing__price">
+                    <span class="pricing__price-amount">€350</span>
+                    <span class="pricing__price-period">/mesiac</span>
+                  </div>
+                  <p class="pricing__tier-desc">Pre SME pripravené automatizovať pravidelné finančné reportovanie</p>
+
+                  <div class="pricing__divider"></div>
+
+                  <span class="pricing__features-label">Čo získate:</span>
+                  <ul class="pricing__features">
+                    <li class="pricing__feature">
+                      <span class="pricing__checkmark">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                          <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      <span>Automatizované finančné výkazy a účtovné reporty</span>
+                    </li>
+                    <li class="pricing__feature">
+                      <span class="pricing__checkmark">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                          <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      <span>Prehľady pohľadávok a záväzkov s analýzou stamutia</span>
+                    </li>
+                    <li class="pricing__feature">
+                      <span class="pricing__checkmark">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                          <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      <span>Súhrny účtovných operácií a faktúr</span>
+                    </li>
+                    <li class="pricing__feature">
+                      <span class="pricing__checkmark">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                          <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      <span>Profesionálne sledovanie finančnej výkonnosti</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Professional Tier (Highlighted) -->
+                <div class="pricing__tier pricing__tier--highlighted">
+                  <div class="pricing__tier-header">
+                    <h3 class="pricing__tier-name">Professional</h3>
+                    <span class="pricing__tier-badge">Odporúčame</span>
+                  </div>
+                  <div class="pricing__price">
+                    <span class="pricing__price-amount">€750</span>
+                    <span class="pricing__price-period">/mesiac</span>
+                  </div>
+                  <p class="pricing__tier-desc">Pre rastúce SME automatizujúce denné monitorovanie podnikania</p>
+
+                  <div class="pricing__divider"></div>
+
+                  <span class="pricing__features-label">Čo získate:</span>
+                  <ul class="pricing__features">
+                    <li class="pricing__feature">
+                      <span class="pricing__checkmark">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                          <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      <span>Všetko z balíčka Essential</span>
+                    </li>
+                    <li class="pricing__feature">
+                      <span class="pricing__checkmark">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                          <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      <span>Sledovanie produktov, projektov a nákladových stredísk</span>
+                    </li>
+                    <li class="pricing__feature pricing__feature--parent">
+                      <span class="pricing__checkmark">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                          <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      <span>Výber jedného z nasledujúcich business modulov:</span>
+                    </li>
+                    <li class="pricing__feature pricing__feature--child">
+                      <span class="pricing__arrow">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2">
+                          <path d="M9 6l6 6-6 6"/>
+                        </svg>
+                      </span>
+                      <span>Analýza distribúcie</span>
+                    </li>
+                    <li class="pricing__feature pricing__feature--child">
+                      <span class="pricing__arrow">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2">
+                          <path d="M9 6l6 6-6 6"/>
+                        </svg>
+                      </span>
+                      <span>Optimalizácia skladov</span>
+                    </li>
+                    <li class="pricing__feature pricing__feature--child">
+                      <span class="pricing__arrow">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2">
+                          <path d="M9 6l6 6-6 6"/>
+                        </svg>
+                      </span>
+                      <span>Ziskovosť projektov</span>
+                    </li>
+                    <li class="pricing__feature pricing__feature--child">
+                      <span class="pricing__arrow">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2">
+                          <path d="M9 6l6 6-6 6"/>
+                        </svg>
+                      </span>
+                      <span>Analytika CRM</span>
+                    </li>
+                    <li class="pricing__feature pricing__feature--child">
+                      <span class="pricing__arrow">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2">
+                          <path d="M9 6l6 6-6 6"/>
+                        </svg>
+                      </span>
+                      <span>Analýza SaaS Portfólia</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Business Tier -->
+                <div class="pricing__tier">
+                  <div class="pricing__tier-header">
+                    <h3 class="pricing__tier-name">Business</h3>
+                  </div>
+                  <div class="pricing__price">
+                    <span class="pricing__price-amount">€1450</span>
+                    <span class="pricing__price-period">/mesiac</span>
+                  </div>
+                  <p class="pricing__tier-desc">Pre ambiciózne skupiny s viacerými entitami automatizujúce vo veľkom</p>
+
+                  <div class="pricing__divider"></div>
+
+                  <span class="pricing__features-label">Čo získate:</span>
+                  <ul class="pricing__features">
+                    <li class="pricing__feature">
+                      <span class="pricing__checkmark">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                          <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      <span>Všetko z balíčka Professional</span>
+                    </li>
+                    <li class="pricing__feature">
+                      <span class="pricing__checkmark">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                          <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      <span>Konsolidované reportovanie pre viaceré entity skupín v rôznych menách</span>
+                    </li>
+                    <li class="pricing__feature">
+                      <span class="pricing__checkmark">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                          <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      <span>Analýza odchýlok voči plánu a projekciám</span>
+                    </li>
+                    <li class="pricing__feature">
+                      <span class="pricing__checkmark">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                          <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      <span>Nastavenie vlastných parametrov, dimenzií a metrík</span>
+                    </li>
+                    <li class="pricing__feature">
+                      <span class="pricing__checkmark">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                          <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      <span>Výber až 3 business modulov</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Managed Service Tier -->
+                <div class="pricing__tier">
+                  <div class="pricing__tier-header">
+                    <h3 class="pricing__tier-name">Managed Service</h3>
+                  </div>
+                  <div class="pricing__price">
+                    <span class="pricing__price-prefix">od</span>
+                    <span class="pricing__price-amount">€3000</span>
+                    <span class="pricing__price-period">/mesiac</span>
+                  </div>
+                  <p class="pricing__tier-desc">Pre vizionárske spoločnosti pripravené na transformáciu s AI-poháňanou inteligenciou</p>
+
+                  <div class="pricing__divider"></div>
+
+                  <span class="pricing__features-label">Čo získate:</span>
+                  <ul class="pricing__features">
+                    <li class="pricing__feature">
+                      <span class="pricing__checkmark">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                          <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      <span>Čiastočný alebo úplný outsourcing BI a AI funkcií</span>
+                    </li>
+                    <li class="pricing__feature">
+                      <span class="pricing__checkmark">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                          <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      <span>Neobmedzený výber z dostupných business modulov</span>
+                    </li>
+                    <li class="pricing__feature">
+                      <span class="pricing__checkmark">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                          <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      <span>Custom vývoj a integrácie</span>
+                    </li>
+                    <li class="pricing__feature">
+                      <span class="pricing__checkmark">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                          <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      <span>Dedikovaný tím pre analytiku a strategickú inteligenciu</span>
+                    </li>
+                    <li class="pricing__feature">
+                      <span class="pricing__checkmark">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                          <circle cx="10" cy="10" r="10" fill="var(--color-primary-10)"/>
+                          <path d="M6 10L9 13L14 7" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
+                      <span>AI-poháňané poradenstvo pre transformáciu podnikania</span>
+                    </li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Footer CTA -->
+            <div class="pricing__footer">
+              <p class="pricing__footer-question">Ktorý balíček sedí na vaše dáta a procesy?</p>
+              <button class="btn btn-info btn-lg">
+                Rezervujte si bezplatnú konzultáciu
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+              <p class="pricing__footer-subtext">Pomôžeme vám vybrať správne riešenie a ukážeme, ako Onetribe funguje s vašim ERP systémom.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section id="faq" class="preview-section">
+        <h2 class="section-title">FAQ</h2>
+
+        <div class="component-group" style="background: var(--color-background); padding: 0; border: none;">
+          <!-- FAQ Component -->
+          <div class="faq">
+            <!-- Header - Centered -->
+            <div class="faq__header">
+              <span class="badge">FAQ's</span>
+              <h2 class="faq__title">Často kladené otázky</h2>
+              <p class="faq__subtitle">
+                Tu sme pre vás pripravili odpovede na najčastejšie otázky.
+              </p>
+            </div>
+
+            <!-- Accordion -->
+            <div class="faq__accordion">
+              <!-- Item 1 - Open by default -->
+              <div class="faq__item is-open">
+                <button class="faq__trigger" type="button" aria-expanded="true">
+                  <span class="faq__question">Čo je Onetribe?</span>
+                  <svg class="faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div class="faq__content">
+                  <div class="faq__content-inner">
+                    <p class="faq__answer">
+                      Cloudová platforma, ktorá prepája vaše lokálne ERP systémy s moderným reportingom a AI. Transformujeme roztrieštené dáta do jednotného modelu s BI dashboardmi a pokročilým AI obohateným o predpripravené analýzy, možnosti porovnávania s trhom a inteligentné odpovede overené na presnosť.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 2 -->
+              <div class="faq__item">
+                <button class="faq__trigger" type="button" aria-expanded="false">
+                  <span class="faq__question">Pre koho je Onetribe určená?</span>
+                  <svg class="faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div class="faq__content">
+                  <div class="faq__content-inner">
+                    <p class="faq__answer">
+                      Onetribe je určená pre malé a stredné podniky (SME), ktoré potrebujú lepší prehľad o svojich finančných dátach, automatizované reportovanie a AI-poháňané insighty bez potreby budovania vlastného dátového tímu.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 3 -->
+              <div class="faq__item">
+                <button class="faq__trigger" type="button" aria-expanded="false">
+                  <span class="faq__question">Ako rýchlo uvidím výsledky?</span>
+                  <svg class="faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div class="faq__content">
+                  <div class="faq__content-inner">
+                    <p class="faq__answer">
+                      Prvé výsledky uvidíte už počas úvodnej konzultácie. Plné nasadenie platformy trvá typicky 2-4 týždne v závislosti od komplexnosti vášho ERP systému a požiadaviek na reporty.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 4 -->
+              <div class="faq__item">
+                <button class="faq__trigger" type="button" aria-expanded="false">
+                  <span class="faq__question">Potrebujem technické znalosti?</span>
+                  <svg class="faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div class="faq__content">
+                  <div class="faq__content-inner">
+                    <p class="faq__answer">
+                      Nie, nepotrebujete žiadne technické znalosti. Onetribe je navrhnutá pre bežných používateľov - stačí písať otázky bežným jazykom a AI vám poskytne odpovede a analýzy.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 5 -->
+              <div class="faq__item">
+                <button class="faq__trigger" type="button" aria-expanded="false">
+                  <span class="faq__question">Koľko to stojí?</span>
+                  <svg class="faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div class="faq__content">
+                  <div class="faq__content-inner">
+                    <p class="faq__answer">
+                      Ponúkame štyri cenové balíčky od €350/mesiac (Essential) až po individuálne riešenia (Managed Service). Každý balíček je prispôsobený rôznym potrebám a veľkostiam firiem.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 6 -->
+              <div class="faq__item">
+                <button class="faq__trigger" type="button" aria-expanded="false">
+                  <span class="faq__question">Sú moje dáta v bezpečí?</span>
+                  <svg class="faq__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div class="faq__content">
+                  <div class="faq__content-inner">
+                    <p class="faq__answer">
+                      Áno, bezpečnosť je našou prioritou. Používame šifrovanie na úrovni enterprise, dáta sú uložené v certifikovaných dátových centrách v EÚ a dodržiavame všetky relevantné predpisy vrátane GDPR.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Footer Contact -->
+            <div class="faq__footer">
+              <p class="faq__contact">
+                <svg class="faq__contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+                <span>Ak máte ďalšie otázky, napíšte nám ich na: <a href="mailto:podpora@onetribe.sk">podpora@onetribe.sk</a></span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer style="text-align: center; padding-top: var(--space-8); color: var(--color-text-muted);">
+        <p class="text-body-sm">OneTribe Design System &copy; 2025</p>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Scroll Spy Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('.preview-section[id]');
+      const navLinks = document.querySelectorAll('.ds-nav-link');
+
+      function updateActiveLink() {
+        const scrollPos = window.scrollY + 100;
+
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          const sectionId = section.getAttribute('id');
+
+          if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === '#' + sectionId) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }
+
+      window.addEventListener('scroll', updateActiveLink);
+      updateActiveLink();
+    });
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq__trigger').forEach(trigger => {
+      trigger.addEventListener('click', function() {
+        const item = this.closest('.faq__item');
+        const isOpen = item.classList.contains('is-open');
+
+        // Toggle current item
+        item.classList.toggle('is-open');
+        this.setAttribute('aria-expanded', !isOpen);
+      });
+    });
+  </script>
+</body>
+</html>
