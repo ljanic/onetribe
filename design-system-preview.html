@@ -891,6 +891,123 @@
         padding: 0 var(--space-5) var(--space-4);
       }
     }
+
+    /* ==========================================================================
+       Large Text Card Component
+       ========================================================================== */
+
+    .text-card {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: var(--space-16) var(--space-6);
+      background: var(--color-background);
+    }
+
+    .text-card__container {
+      background: var(--gradient-primary-light);
+      border-radius: var(--radius-3xl);
+      padding: var(--space-12) var(--space-10);
+    }
+
+    .text-card__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-12);
+    }
+
+    /* Left Column */
+    .text-card__left .badge {
+      margin-bottom: var(--space-4);
+    }
+
+    .text-card__title {
+      font-family: var(--font-heading);
+      font-size: var(--text-3xl);
+      font-weight: var(--font-normal);
+      line-height: var(--leading-tight);
+      letter-spacing: var(--tracking-tight);
+      color: var(--color-text);
+      margin-bottom: var(--space-6);
+    }
+
+    .text-card__description {
+      font-size: var(--text-base);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text);
+      margin-bottom: var(--space-6);
+    }
+
+    .text-card__link {
+      font-size: var(--text-base);
+      font-weight: var(--font-medium);
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .text-card__link:hover {
+      color: var(--color-primary);
+    }
+
+    /* Right Column */
+    .text-card__right-title {
+      font-size: var(--text-base);
+      font-weight: var(--font-normal);
+      color: var(--color-text);
+      margin-bottom: var(--space-6);
+    }
+
+    .text-card__services {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .text-card__service {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      font-size: var(--text-base);
+      line-height: var(--leading-relaxed);
+      color: var(--color-text);
+    }
+
+    .text-card__service-icon {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      color: var(--color-text);
+      margin-top: 2px;
+    }
+
+    .text-card__service-text strong {
+      font-weight: var(--font-medium);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .text-card__grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .text-card {
+        padding: var(--space-10) var(--space-4);
+      }
+
+      .text-card__container {
+        padding: var(--space-8) var(--space-6);
+        border-radius: var(--radius-2xl);
+      }
+
+      .text-card__title {
+        font-size: var(--text-2xl);
+      }
+    }
   </style>
 </head>
 <body>
@@ -913,6 +1030,7 @@
       <li class="ds-nav-item"><a href="#feature-spotlight" class="ds-nav-link">Feature Spotlight</a></li>
       <li class="ds-nav-item"><a href="#pricing" class="ds-nav-link">Pricing</a></li>
       <li class="ds-nav-item"><a href="#faq" class="ds-nav-link">FAQ</a></li>
+      <li class="ds-nav-item"><a href="#text-card" class="ds-nav-link">Text Card</a></li>
     </ul>
   </nav>
 
@@ -2002,6 +2120,61 @@
                 </svg>
                 <span>Ak máte ďalšie otázky, napíšte nám ich na: <a href="mailto:podpora@onetribe.sk">podpora@onetribe.sk</a></span>
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Text Card Section -->
+      <section id="text-card" class="preview-section">
+        <h2 class="section-title">Large Text Card</h2>
+
+        <div class="component-group" style="background: var(--color-background); padding: 0; border: none;">
+          <!-- Text Card Component -->
+          <div class="text-card">
+            <div class="text-card__container">
+              <div class="text-card__grid">
+                <!-- Left Column -->
+                <div class="text-card__left">
+                  <span class="badge">O nás</span>
+                  <h2 class="text-card__title">Spoločnosť Onetribeadvisory</h2>
+                  <p class="text-card__description">
+                    Platformu vyvinula Onetribeadvisory, konzultačná spoločnosť pôsobiaca v CEE, UK a UAE, poskytujúca špičkové business a artificial intelligence nástroje na realizáciu finančných analýz a obchodných informácií. Pomáhame SME s obratom EUR 1-20M riadiť business v reálnom čase a dodávame kvalitné dáta presne tam, kde sú potrebné – bez potreby interného dátového tímu.
+                  </p>
+                  <a href="https://onetribeadvisory.sk" class="text-card__link">onetribeadvisory.sk</a>
+                </div>
+
+                <!-- Right Column -->
+                <div class="text-card__right">
+                  <p class="text-card__right-title">Naše služby:</p>
+                  <ul class="text-card__services">
+                    <li class="text-card__service">
+                      <svg class="text-card__service-icon" viewBox="0 0 256 256" fill="currentColor">
+                        <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/>
+                      </svg>
+                      <span class="text-card__service-text"><strong>Automatizovaná AI analytika</strong> - pýtajte sa po slovensky, dostávate odpovede z vašich dát</span>
+                    </li>
+                    <li class="text-card__service">
+                      <svg class="text-card__service-icon" viewBox="0 0 256 256" fill="currentColor">
+                        <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/>
+                      </svg>
+                      <span class="text-card__service-text"><strong>ERP integrácia</strong> - prepojenie Pohoda, Money, Helios a ďalších systémov</span>
+                    </li>
+                    <li class="text-card__service">
+                      <svg class="text-card__service-icon" viewBox="0 0 256 256" fill="currentColor">
+                        <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/>
+                      </svg>
+                      <span class="text-card__service-text"><strong>Manažované služby</strong> - outsourcing celej BI a analytickej funkcie</span>
+                    </li>
+                    <li class="text-card__service">
+                      <svg class="text-card__service-icon" viewBox="0 0 256 256" fill="currentColor">
+                        <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/>
+                      </svg>
+                      <span class="text-card__service-text"><strong>CFO Advisory</strong> - strategické finančné poradenstvo</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
